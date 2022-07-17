@@ -162,17 +162,17 @@
   s = Date.now()
   log = (text) ->
   	console.log Date.now()-s, Array.prototype.slice.call(arguments).join(", ")
-  
+
   log "Started"
-  
+
   cmd = (query) ->
   	p = new Promise()
   	setTimeout ( ->
   		p.resolve query+" Result"
   	), 100
   	return p
-  
-  
+
+
   back = cmd("SELECT * FROM message").then (res) ->
   	log res
   	p = new Promise()
@@ -185,13 +185,13 @@
   	return cmd("SELECT * FROM users")
   .then (res) ->
   	log "End result", res
-  
+
   log "Query started", back
-  
-  
+
+
   q1 = cmd("SELECT * FROM anything")
   q2 = cmd("SELECT * FROM something")
-  
+
   Promise.join(q1, q2).then (res1, res2) ->
     log res1, res2
    */
@@ -304,7 +304,7 @@
   window.load = (done, num) ->
     console.log "Loading #{num}...", Date.now()-window.s
     setTimeout (-> done()), 1000
-  
+
   RateLimit 500, window.load, [0] # Called instantly
   RateLimit 500, window.load, [1]
   setTimeout (-> RateLimit 500, window.load, [300]), 300
@@ -4955,7 +4955,7 @@ function clone(obj) {
           classes: {
             editing: this.is_editing
           }
-        }, h("div.user", user.renderAvatar()), h("a.icon-image.link", {
+        }, h("div.user", user.renderAvatar()), h("div.postbuttons", h("a.icon-image.link", {
           href: "#",
           onclick: this.handleUploadClick
         }), this.field_post.render(), this.image.base64uri ? h("div.image", {
@@ -4973,7 +4973,7 @@ function clone(obj) {
           classes: {
             empty: true
           }
-        }), h("div.postbuttons", h("a.button.button-submit", {
+        }), h("a.button.button-submit", {
           href: "#Submit",
           onclick: this.handlePostSubmit
         }, "Submit new post")), h("div", {
